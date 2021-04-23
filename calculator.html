@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous" />
+
+</head>
+
+<body>
+    <div id="bmi">
+
+    </div>
+    <script type="text/babel">
+        class Bmi extends React.Component {
+            result() {
+                var w = document.getElementById("val1").value;
+                var h = document.getElementById("val2").value;
+                var wght = Number(w);
+                var hyt = Number(h);
+                if (hyt != 0) {
+                    var sol= (wght / (hyt * hyt)).toFixed(2);
+                    var category = "";
+                    if (sol< 18.5) {
+                        category = "UNDER WEIGHT";
+                    }
+                    else if (sol> 18.5 && sol< 24.9) {
+                        category = "NORMAL WEIGHT";
+                    }
+                    else if (sol> 24.9 && sol< 29.9) {
+                        category = "OVER WEIGHT";
+                    }
+                    else {
+                        category = "OBESE";
+                    }
+                    // alert(res);
+                    document.getElementById("resu").innerHTML = '<br><center><b>Bmi: </b>' + sol+ '</center>';
+                    document.getElementById("resu").innerHTML += '<br><center><b>Type: </b>' + category + '</center>';
+                }
+                else{
+                    document.getElementById("resu").innerHTML = '<br><center><b>Calculation not Possible</b></center>';
+                    document.getElementById("resu").innerHTML += '<br><center><b>Giver valid Inputs</b></center>';
+                }
+            }
+            addition() {
+                var inp1 = document.getElementById("val3").value;
+                var inp2 = document.getElementById("val4").value;
+                var in1 = Number(inp1);
+                var in2 = Number(inp2);
+                var sol1 = in1 + in2;
+                document.getElementById("re").innerHTML = '<br><center><b>Answer= </b>' + sol1 + '</center>';
+            }
+            substraction() {
+                var inp1 = document.getElementById("val3").value;
+                var inp2 = document.getElementById("val4").value;
+                var in1 = Number(inp1);
+                var in2 = Number(inp2);
+                var sol1 = in1 - in2;
+                document.getElementById("re").innerHTML = '<br><center><b>Answer= </b>' + sol1 + '</center>';
+            }
+            multiplication() {
+                var inp1 = document.getElementById("val3").value;
+                var inp2 = document.getElementById("val4").value;
+                var in1 = Number(inp1);
+                var in2 = Number(inp2);
+                var sol1 = in1 * in2;
+                document.getElementById("re").innerHTML = '<br><center><b>Answer= </b>' + sol1 + '</center>';
+            }
+            division() {
+                var inp1 = document.getElementById("val3").value;
+                var inp2 = document.getElementById("val4").value;
+                var in1 = Number(inp1);
+                var in2 = Number(inp2);
+                if (in2 != 0) {
+                    var sol1 = in1 / in2;
+                    document.getElementById("re").innerHTML = '<br><center><b>Answer= </b>' + sol1 + '</center>';
+                }
+                else {
+                    document.getElementById("re").innerHTML = '<br><center><b>Cannot Perform Division</b></center>';
+                }
+            }
+            render() {
+                return (
+                    <div class="container"><br/><br/><br/>  
+                        <div class="row">
+                            <div class="col-md-5 ml-3 mr-3 border border-light">
+                                <div><center><h1>BMI CALCULATOR</h1></center></div>
+                                <div class="mt-5">
+                                    <h4><label for="val1" class="form-label">Weight</label></h4>
+                                    <input type="number" id="val1" class="form-control" placeholder="Weight in kg's" />
+                                </div>
+                                <div class="mt-5">
+                                    <h4><label for="val2" class="form-label">Height(m)</label></h4>
+                                    <input type="number" id="val2" class="form-control" placeholder="Height in meter's" />
+                                </div>
+
+                                <div class="mt-5">
+                                    <button type="submit" class="btn btn-primary" onClick={this.result}>Answer</button>
+                                </div>
+                                <div id="resu"></div>
+                            </div>
+                            <div class="col-md-1 ml-3 mr-3"></div>
+                            <div class="col-md-6 ml-3 mr-3 border border-light">
+                                <div><center><h1>CALCULATOR</h1></center></div>
+                                <div class="mt-5">
+                                    <h4><label for="val3" class="form-label">Enter a Value</label></h4>
+                                    <input type="number" id="val3" class="form-control" placeholder="Number" />
+                                </div>
+                                <div class="mt-5">
+                                    <h4><label for="val4" class="form-label">Enter a Value</label></h4>
+                                    <input type="number" id="val4" class="form-control" placeholder="Number" />
+                                </div>
+
+                                <div class="mt-5">
+                                    <center><button type="submit" class="btn btn-primary" onClick={this.addition}>Addition (+)</button>
+                                    &emsp;<button type="submit" class="btn btn-primary" onClick={this.substraction}>Substraction (-)</button>
+                                    &emsp;<button type="submit" class="btn btn-primary" onClick={this.multiplication}>Multiplication (*)</button>
+                                    &emsp;<button type="submit" class="btn btn-primary" onClick={this.division}>Division (/)</button></center>
+                                </div>
+                                <div id="re"></div>
+                            </div>
+                        </div>
+                    </div>);
+            }
+        }
+        ReactDOM.render(<Bmi />, document.getElementById("bmi"));
+    </script>
+    <style>
+        body{
+            background-image: url(math1.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        h1{
+            color: aliceblue;
+        }
+        h4{
+            color: rgb(255, 255, 255);
+        }
+        #re{
+            color: aliceblue;
+            font-size: 50px;
+        }
+        #resu{
+            color: aliceblue;
+            font-size: 50px;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
